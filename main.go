@@ -52,7 +52,8 @@ func ReadDir(dir string, name string, printFlag bool) { // takes in path, target
 func RenameFiles(files []fs.DirEntry, dir string, name string) error {
 	fmt.Println("Renaming files:")
 	for i, f := range files {
-		formattedName := fmt.Sprintf("%s_%d.txt", name, i+1)
+		ext := filepath.Ext(f.Name())
+		formattedName := fmt.Sprintf("%s_%d%s", name, i+1, ext)
 		oldName := filepath.Join(dir, f.Name())
 		newName := filepath.Join(dir, formattedName)
 		err := os.Rename(oldName, newName)
